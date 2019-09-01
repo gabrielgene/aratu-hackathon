@@ -5,9 +5,10 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
-import BaseOnboarding from './components/BaseOnboarding';
-import Finish from './components/Finish';
+import BaseOnboarding from './pages/BaseOnboarding';
+import Finish from './pages/Finish';
 import Dashboard from './pages/Dashboard';
+
 import * as serviceWorker from './serviceWorker';
 
 import './index.css';

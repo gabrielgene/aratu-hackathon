@@ -93,7 +93,7 @@ export default function BaseOnboarding({ router }) {
     });
   }, []);
 
-  const onFailureGoogle = useCallback(() => {}, []);
+  const onFailureGoogle = useCallback(err => console.error(err), []);
 
   return (
     <div className={classes.root}>

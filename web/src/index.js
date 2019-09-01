@@ -22,6 +22,7 @@ const App = () => (
   <Router>
     <React.Fragment>
       <Route exact path="/" component={BaseOnboarding} />
+      <Route path="/tw/:id" component={BaseOnboarding} />
       <Route path="/concluido" component={Finish} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/formulario" component={Form} />

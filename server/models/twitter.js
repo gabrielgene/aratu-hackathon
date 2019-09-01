@@ -5,6 +5,7 @@ const TwitterSchema = mongoose.Schema({
   tweet: String,
   tweet_time: String,
   receive_dm: Boolean,
+  email: String,
 });
 
 module.exports = mongoose.model('Twitter', TwitterSchema, 'twitter');

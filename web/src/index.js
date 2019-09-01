@@ -18,7 +18,7 @@ const App = () => (
   <Router>
     <React.Fragment>
       <Route exact path="/" component={BaseOnboarding} />
-      <Route path="/finish" component={Finish} />
+      <Route path="/concluido" component={Finish} />
       <Route path="/dashboard" component={Dashboard} />
     </React.Fragment>
   </Router>

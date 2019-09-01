@@ -44,7 +44,7 @@ const defaultLottieOptions = {
   },
 };
 
-export default function BaseOnboarding({ router }) {
+export default function BaseOnboarding({ history }) {
   const classes = useStyles();
 
   const [values, setValues] = useState({
@@ -87,7 +87,7 @@ export default function BaseOnboarding({ router }) {
       //SEND ALL TO BACKEND
       sendUserData(userData)
         .then(() => {
-          router.push('/concluido');
+          history.push('/concluido');
         })
         .catch(err => console.log(err));
     });

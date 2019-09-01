@@ -11,6 +11,8 @@
     "@material-ui/icons": "^4.2.1",
     "chart.js": "^2.8.0",
     "clsx": "^1.0.4",
+    "export-from-json": "^1.1.4",
+    "object-to-csv": "^1.0.2",
     "react": "^16.9.0",
     "react-cookie": "^4.0.1",
     "react-dom": "^16.9.0",

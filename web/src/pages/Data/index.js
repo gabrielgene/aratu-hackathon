@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import SaveIcon from '@material-ui/icons/Save';
 import IconButton from '@material-ui/core/IconButton';
+import exportFromJSON from 'export-from-json'
 
 import clsx from 'clsx';
 
@@ -110,11 +111,10 @@ export default function SimpleTable() {
   };
 
   const generateCsv = (trueData) => {
-    let csvContent = "data:text/csv;charset=utf-8," 
-      + trueData.map(e => e.join(",")).join("\n");
-
-    const encodedUri = encodeURI(csvContent);
-    window.open(encodedUri);
+    const fileName = 'download'
+    const exportType = 'csv'
+     
+    exportFromJSON({ data: trueData, fileName, exportType })
   }
 
   const filters = [

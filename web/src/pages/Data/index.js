@@ -6,7 +6,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import SaveIcon from '@material-ui/icons/Save';
+import IconButton from '@material-ui/core/IconButton';
+
+import clsx from 'clsx';
+
 import { getLocations, getTwitters } from '../../services/Data';
 
 import Topbar from '../../components/Topbar';
@@ -18,16 +24,27 @@ const useStyles = makeStyles(theme => ({
   filtersPaper: {
     margin: theme.spacing(3),
     paddingBottom: theme.spacing(1),
+    display: 'flex',
+    justifyContent: 'space-evenly',
   },
   table: {
     minWidth: 650,
   },
-  textField: {
-    marginLeft: theme.spacing(4),
-    marginRight: theme.spacing(4),
-  },
+  // textField: {
+  //   marginLeft: theme.spacing(3),
+  //   marginRight: theme.spacing(3),
+  // },
   text: {
     width: 300,
+  },
+  leftIcon: {
+    marginRight: theme.spacing(1),
+  },
+  iconSmall: {
+    fontSize: 20,
+  },
+  button: {
+    margin: theme.spacing(2),
   },
 }));
 
@@ -92,6 +109,14 @@ export default function SimpleTable() {
     setValues({ ...values, [name]: value });
   };
 
+  const generateCsv = (trueData) => {
+    let csvContent = "data:text/csv;charset=utf-8," 
+      + trueData.map(e => e.join(",")).join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    window.open(encodedUri);
+  }
+
   const filters = [
     { name: 'Email', change: 'email' },
     { name: 'Bairro', change: 'suburb' },
@@ -116,6 +141,9 @@ export default function SimpleTable() {
             variant="outlined"
           />
         ))}
+        <IconButton className={clsx(classes.button, classes.iconSmall)} onClick={() => generateCsv(trueData)}>
+          <SaveIcon />
+        </IconButton>
       </Paper>
 
       <Paper className={classes.root}>

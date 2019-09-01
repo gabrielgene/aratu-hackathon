@@ -1,5 +1,7 @@
+const host = 'aratu-server.gabrielgene.now.sh'
+
 export function getTwitterAmount() {
-  return fetch('http://localhost:3000/api/twitter.js', {
+  return fetch(`http://${host}/api/twitter.js`, {
     method: 'GET',
     cache: 'no-cache',
     credentials: 'same-origin',
@@ -10,7 +12,7 @@ export function getTwitterAmount() {
 }
 
 export function getUserAmount() {
-  return fetch('http://localhost:3000/api/user.js', {
+  return fetch(`http://${host}/api/user.js`, {
     method: 'GET',
     method: 'GET',
     cache: 'no-cache',
@@ -22,7 +24,7 @@ export function getUserAmount() {
 }
 
 export function getLocations() {
-  return fetch('http://localhost:3000/api/location.js', {
+  return fetch(`http://${host}/api/location.js`, {
     method: 'GET',
     method: 'GET',
     cache: 'no-cache',
@@ -34,7 +36,7 @@ export function getLocations() {
 }
 
 export function getTwitters() {
-  return fetch('http://localhost:3000/api/twitterUsers.js', {
+  return fetch(`http://${host}/api/twitterUsers.js`, {
     method: 'GET',
     method: 'GET',
     cache: 'no-cache',

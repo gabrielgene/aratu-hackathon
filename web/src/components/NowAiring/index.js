@@ -1,20 +1,28 @@
-import React from "react";
+import React from 'react';
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Card from '@material-ui/core/Card';
+import FormControl from '@material-ui/core/FormControl';
+import CardHeader from '@material-ui/core/CardHeader';
 import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     alignItems: 'center',
+    margin: 16,
   },
   bigAvatar: {
-    margin: 10,
+    margin: 8,
     width: 60,
     height: 60,
+  },
+  cardHeader: {
+    fontSize: 20,
+    fontWeight: 500,
   },
 }));
 
@@ -23,8 +31,15 @@ export default function NowAiring({ className }) {
 
   return (
     <Card className={clsx(classes.root, className)}>
-      <CardHeader title="Passando agora: Que Venha o Povo" color="textSecondary" />
-      <Avatar alt="avatar" src="https://i.imgur.com/BFuaWoq.png" className={classes.bigAvatar} />
+      <div className="Beacon">
+        <div className="Beacon-intern" />
+      </div>
+
+      <CardHeader
+        title="Hackaton Aratu"
+        classes={{ title: classes.cardHeader }}
+        color="#2f2b63"
+      />
     </Card>
   );
 }

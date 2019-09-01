@@ -12,3 +12,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Beacon {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 2px red;
+  animation: beacon-move 0.7s infinite;
+  margin-left: 41px;
+}
+
+.Beacon-intern {
+  width: 15px;
+  height: 15px;
+  background: red;
+  border-radius: 50%;
+}
+
+@keyframes beacon-move {
+  0%, 100% {
+    transform: scale(0.75);
+  }
+  50% {
+    transform: scale(1);
+  }
+}

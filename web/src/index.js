@@ -8,6 +8,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import BaseOnboarding from './pages/BaseOnboarding';
 import Finish from './pages/Finish';
 import Dashboard from './pages/Dashboard';
+import Form from './pages/Form';
+import Data from './pages/Data';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -21,6 +23,8 @@ const App = () => (
       <Route exact path="/" component={BaseOnboarding} />
       <Route path="/concluido" component={Finish} />
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/form" component={Form} />
+      <Route path="/dados" component={Data} />
     </React.Fragment>
   </Router>
 );

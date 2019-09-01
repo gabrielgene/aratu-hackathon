@@ -14,7 +14,6 @@ const useStyles = makeStyles(theme => ({
   content: {
     display: 'flex',
     padding: 16,
-    paddingTop: 0,
   },
   contentMiddle: {
     display: 'flex',
@@ -27,18 +26,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ButtonAppBar() {
+export default function Form() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Topbar />
-      <NowAiring className={classes.nowAiring} />
       <div className={classes.content}>
-        <NumberStats />
-        <div className={classes.contentMiddle}>
-          <HistoryChart />
-        </div>
+        <h1>Form</h1>
       </div>
     </div>
   );

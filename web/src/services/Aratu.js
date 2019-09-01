@@ -1,4 +1,4 @@
-const API_URL = '';
+const API_URL = 'https://aratu-hackathon.gabrielgene.now.sh/api/form.js';
 
 export function sendUserData(userData) {
   return fetch(API_URL, {

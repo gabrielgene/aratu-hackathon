@@ -70,9 +70,11 @@ export default function BaseOnboarding({ router }) {
         };
 
         //SEND ALL TO BACKEND
-        sendUserData(userData).then(() => {
-          router.push('/finish');
-        });
+        sendUserData(userData)
+          .then(() => {
+            router.push('/finish');
+          })
+          .catch(err => console.log(err));
 
         setValues({ isLoading: false, isValidated: true });
       });

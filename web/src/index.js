@@ -9,7 +9,6 @@ import BaseOnboarding from './pages/BaseOnboarding';
 import Form from './pages/Form';
 import Finish from './pages/Finish';
 import Dashboard from './pages/Dashboard';
-import Form from './pages/Form';
 import Data from './pages/Data';
 
 import * as serviceWorker from './serviceWorker';

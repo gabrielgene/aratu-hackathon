@@ -34,9 +34,7 @@ export default function ButtonAppBar() {
       <NowAiring className={classes.nowAiring} />
       <div className={classes.content}>
         <NumberStats />
-        <div className={classes.contentMiddle}>
-          <HistoryChart />
-        </div>
+        <HistoryChart />
       </div>
     </div>
   );

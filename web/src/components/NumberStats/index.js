@@ -8,6 +8,8 @@ const useStyles = makeStyles(theme => ({
   numberStats: {
     display: 'flex',
     flexDirection: 'column',
+    height: 698,
+    marginRight: 16,
   },
   numberCard: {
     marginBottom: 16,

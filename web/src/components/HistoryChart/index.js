@@ -9,8 +9,9 @@ import { getLocations } from '../../services/Data';
 const useStyles = makeStyles(theme => ({
   history: {
     padding: 8,
-    minHeight: 424,
     minWidth: 800,
+    flexGrow: 1,
+    height: 668,
   },
 }));
 

@@ -12,13 +12,19 @@ app.use(bodyParser.json());
 
 app.post('*', async (req, res) => {
   await connect();
-  console.log('>>>>>>>>>>>>>', req.body);
 
   const model = new User(req.body);
 
   model.save().then(data => {
     res.cookie('googleId', req.body.googleId, { maxAge: 9000000000 });
     res.status(200).send(data);
+  });
+});
+
+app.get('*', async (req, res) => {
+  await connect();
+  User.findOne({}).then(user => {
+    res.send(user);
   });
 });
 

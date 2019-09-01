@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "aratu-server",
+  "builds": [
+    { "src": "api/**/*.js", "use": "@now/node" }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    }
+  ],
+  "env": {
+    "MONGODB_URI": "@aratumongouri"
+  }
+}

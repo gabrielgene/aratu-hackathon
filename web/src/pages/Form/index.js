@@ -1,40 +1,173 @@
-import React from 'react';
-
-import { makeStyles } from '@material-ui/core/styles';
-
-import Topbar from '../../components/Topbar';
-import NumberStats from '../../components/NumberStats';
-import HistoryChart from '../../components/HistoryChart';
-import NowAiring from '../../components/NowAiring';
+import React, { useState, useRef } from 'react';
+import {
+  makeStyles,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  OutlinedInput,
+  MenuItem,
+  Button,
+  Typography,
+} from '@material-ui/core';
+import Lottie from 'react-lottie';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
-  },
-  content: {
-    display: 'flex',
-    padding: 16,
-  },
-  contentMiddle: {
+    flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    marginLeft: 16,
-    flexGrow: 1,
+    padding: 20,
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderBottomLeftRadius: 12,
+    borderBottomRightRadius: 12,
   },
-  nowAiring: {
-    marginBottom: 16,
+  textField: {
+    width: '100%',
+    marginTop: 8,
+  },
+  input: {},
+  button: {
+    marginTop: 18,
+    width: '100%',
+    backgroundColor: '#302b63',
+  },
+  title: {
+    color: '#302b63',
+    fontFamily: 'Ubuntu',
+    textAlign: 'center',
+    marginTop: 16,
   },
 }));
 
-export default function Form() {
+const defaultLottieOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: require('../../animations/form.json'),
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice',
+  },
+};
+
+const backdropOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: require('../../animations/backdrop.json'),
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice',
+  },
+};
+
+const loadingOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: require('../../animations/loading.json'),
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice',
+  },
+};
+
+export default function Form({ router }) {
   const classes = useStyles();
 
+  const inputLabel = React.useRef(null);
+  const [labelWidth, setLabelWidth] = React.useState(0);
+  React.useEffect(() => {
+    setLabelWidth(inputLabel.current.offsetWidth);
+  }, []);
+
+  const [values, setValues] = useState({
+    phone: '',
+    gender: '',
+    age: '',
+    isLoading: false,
+  });
+
+  const onChange = e => {
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onCompleted = () => {
+    setValues({ ...values, isLoading: true });
+    //Send data to BACKEND
+  };
+
   return (
-    <div className={classes.root}>
-      <Topbar />
-      <div className={classes.content}>
-        <h1>Form</h1>
+    <React.Fragment>
+      <div className={classes.root}>
+        <Typography className={classes.title} variant="h5" gutterBottom>
+          Complete para participar!
+        </Typography>
+        {values.isLoading ? (
+          <Lottie options={loadingOptions} width="70%" height="70%" />
+        ) : (
+          <Lottie options={defaultLottieOptions} width="200" height="200" />
+        )}
+        <TextField
+          disabled={values.isLoading}
+          id="outlined-phone"
+          name="phone"
+          label="Telefone"
+          className={classes.textField}
+          value={values.phone}
+          onChange={onChange}
+          margin="normal"
+          type="number"
+          variant="outlined"
+          InputProps={{
+            className: classes.input,
+          }}
+        />
+        <TextField
+          disabled={values.isLoading}
+          id="outlined-age"
+          name="age"
+          label="Idade"
+          className={classes.textField}
+          value={values.age}
+          onChange={onChange}
+          margin="normal"
+          type="number"
+          variant="outlined"
+          InputProps={{
+            className: classes.input,
+          }}
+        />
+        <FormControl variant="outlined" className={classes.textField}>
+          <InputLabel ref={inputLabel} htmlFor="outlined-gender-simple">
+            Gênero
+          </InputLabel>
+          <Select
+            disabled={values.isLoading}
+            value={values.gender}
+            onChange={onChange}
+            input={
+              <OutlinedInput
+                labelWidth={labelWidth}
+                name="gender"
+                id="outlined-gender-simple"
+              />
+            }
+          >
+            <MenuItem value="Masculino">Masculino</MenuItem>
+            <MenuItem value="Feminino">Feminino</MenuItem>
+            <MenuItem value="Outro">Outro</MenuItem>
+          </Select>
+        </FormControl>
+        <Button
+          disabled={values.isLoading}
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={onCompleted}
+        >
+          {values.isLoading ? 'Enviando...' : 'Enviar'}
+        </Button>
       </div>
-    </div>
+    </React.Fragment>
   );
 }

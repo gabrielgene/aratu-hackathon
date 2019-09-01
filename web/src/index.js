@@ -6,6 +6,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
 import BaseOnboarding from './pages/BaseOnboarding';
+import Form from './pages/Form';
 import Finish from './pages/Finish';
 import Dashboard from './pages/Dashboard';
 import Form from './pages/Form';

@@ -18,11 +18,9 @@ const useStyles = makeStyles(theme => ({
   },
   contentMiddle: {
     display: 'flex',
-    flexDirection: 'column',
-    marginLeft: 16,
     flexGrow: 1,
   },
-  nowAiring: {
+  header: {
     marginBottom: 16,
   },
 }));

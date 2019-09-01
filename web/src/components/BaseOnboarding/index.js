@@ -3,6 +3,7 @@ import Lottie from 'react-lottie';
 import { makeStyles, Typography, CircularProgress } from '@material-ui/core';
 import { GoogleLogin } from 'react-google-login';
 
+import { sendUserData } from '../../services/Aratu';
 import { getAdress } from '../../services/GeolocationAPI';
 
 const useStyles = makeStyles(theme => ({
@@ -38,7 +39,7 @@ const defaultLottieOptions = {
   }
 };
 
-export default function BaseOnboarding(props) {
+export default function BaseOnboarding({ router }) {
   const classes = useStyles();
 
   const [values, setValues] = useState({
@@ -48,14 +49,7 @@ export default function BaseOnboarding(props) {
 
   const onSuccessGoogle = useCallback(response => {
     const { profileObj } = response;
-    const {
-      email,
-      googleId,
-      givenName,
-      name,
-      familyName,
-      imageUrl
-    } = profileObj;
+    const { email, googleId, givenName, name, familyName } = profileObj;
 
     setValues({ ...values, isLoading: true });
 
@@ -66,7 +60,19 @@ export default function BaseOnboarding(props) {
       getAdress(lat, lng).then(result => {
         console.log(result.address);
 
+        const userData = {
+          email,
+          googleId,
+          givenName,
+          name,
+          familyName,
+          address: result.address
+        };
+
         //SEND ALL TO BACKEND
+        sendUserData(userData).then(() => {
+          router.push('/finish');
+        });
 
         setValues({ isLoading: false, isValidated: true });
       });

@@ -18,7 +18,7 @@ def extract_tweets():
 
   browser.get('https://twitter.com/search?q=%23aratuon&src=typed_query')
   time.sleep(3)
-  paginate(5, browser)
+  paginate(2, browser)
 
   tweets = browser.find_elements_by_css_selector('#react-root > div > div > div > main > div > div > div > div > div > div:nth-child(2) > div > div > section > div > div > div > div > div > article')
   for t in tweets:

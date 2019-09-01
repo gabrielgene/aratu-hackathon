@@ -1,4 +1,5 @@
 from utils import create_browser
+from pymongo import MongoClient
 import time
 
 def send_message():
@@ -19,19 +20,19 @@ def send_message():
   button = browser.find_element_by_css_selector('button.submit')
   button.click()
 
-  time.sleep(2)
-  browser.get('https://twitter.com/gabrielgene_')
-  browser.find_element_by_css_selector('button.NewTweetButton').click()
+  client = MongoClient('mongodb://gene:gene123@ds137763.mlab.com:37763/react-basic?retryWrites=false')
+  coll = client['react-basic'].twitter
+  for doc in coll.find({ 'receive_dm' : True }):
+    print(doc['username'])
+    browser.get(doc['username'])
+    time.sleep(2)
+    browser.find_element_by_xpath('//a[@data-testid="SideNav_NewTweet_Button"]').click()
+    time.sleep(1)
 
-  tw_box = browser.find_element_by_css_selector('div#tweet-box-global')
-  tw_box.click()
-  tw_box.send_keys('Ola')
+    tw_box = browser.find_element_by_css_selector('div.DraftEditor-editorContainer > div')
+    tw_box.send_keys('https://aratu-web.gabrielgene.now.sh/')
 
-  browser.find_element_by_css_selector('div.TweetBoxToolbar > div.TweetBoxToolbar-tweetButton.tweet-button > button').click()
-
-  time.sleep(10)
-
-
-
+    browser.find_element_by_xpath('//div[@data-testid="tweetButton"]').click()
+    time.sleep(3)
 
 send_message()

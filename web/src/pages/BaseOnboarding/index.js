@@ -12,27 +12,28 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     padding: 20,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   body: {
     marginTop: 15,
     marginBottom: 30,
     color: 'white',
     fontFamily: 'Ubuntu',
-    textAlign: 'center',
+    textAlign: 'center'
   },
   title: {
     color: 'white',
     fontFamily: 'Ubuntu',
+    textAlign: 'center'
   },
   progress: {
     margin: theme.spacing(2),
-    color: 'white',
+    color: 'white'
   },
   img: {
     width: theme.spacing(41),
-    marginTop: theme.spacing(2),
-  },
+    marginTop: theme.spacing(2)
+  }
 }));
 
 const defaultLottieOptions = {
@@ -40,8 +41,17 @@ const defaultLottieOptions = {
   autoplay: true,
   animationData: require('../../animations/chicken.json'),
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
+};
+
+const loadingLottieOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: require('../../animations/loading.json'),
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 };
 
 export default function BaseOnboarding({ router }) {
@@ -50,8 +60,9 @@ export default function BaseOnboarding({ router }) {
   const [values, setValues] = useState({
     isValidated: false,
     isLoading: false,
+    isAllowed: false,
     lat: 0,
-    lng: 0,
+    lng: 0
   });
 
   useEffect(() => {
@@ -63,8 +74,10 @@ export default function BaseOnboarding({ router }) {
         setValues({ ...values, lat, lng, isAllowed: true });
       },
       () => {
+        console.log('negou auth que sabe');
+
         setValues({ ...values, isAllowed: false });
-      },
+      }
     );
   }, []);
 
@@ -81,7 +94,7 @@ export default function BaseOnboarding({ router }) {
         givenName,
         name,
         familyName,
-        address: result.address,
+        address: result.address
       };
 
       //SEND ALL TO BACKEND
@@ -93,38 +106,51 @@ export default function BaseOnboarding({ router }) {
     });
   }, []);
 
-  const onFailureGoogle = useCallback(() => {}, []);
+  const onFailureGoogle = useCallback(err => {
+    console.log(err);
+  }, []);
 
   return (
     <div className={classes.root}>
-      <img
-        className={classes.img}
-        src="https://i.imgur.com/I1NTCFk.png"
-        alt="logo"
-      />
-      <Lottie options={defaultLottieOptions} width="250" height="250" />
-      <Typography className={classes.body} variant="body1">
-        Estamos participando de um hackaton (competição) e precisamos de sua
-        ajuda! Basta logar com o google, e sua ajuda estará computada, ative as
-        localizacoes tambem, muito obrigado!
-      </Typography>
-      <div className={classes.footer}>
-        {values.isLoading ? (
-          <CircularProgress className={classes.progress} />
-        ) : values.isValidated ? (
-          <Typography className={classes.title} variant="h4" gutterBottom>
-            Obrigado!
-          </Typography>
-        ) : (
-          <GoogleLogin
-            clientId="217118554638-fkh62t3fu61hvlmrqnmeun9idour35jr.apps.googleusercontent.com"
-            buttonText="Entrar com o Google"
-            onSuccess={onSuccessGoogle}
-            onFailure={onFailureGoogle}
-            cookiePolicy={'single_host_origin'}
+      {values.isAllowed ? (
+        <React.Fragment>
+          <img
+            className={classes.img}
+            src='https://i.imgur.com/I1NTCFk.png'
+            alt='logo'
           />
-        )}
-      </div>
+          <Lottie options={defaultLottieOptions} width='250' height='250' />
+          <Typography className={classes.body} variant='body1'>
+            Estamos participando de um hackaton (competição) e precisamos de sua
+            ajuda! Basta logar com o google, e sua ajuda estará computada, ative
+            as localizacoes tambem, muito obrigado!
+          </Typography>
+          <div className={classes.footer}>
+            {values.isLoading ? (
+              <CircularProgress className={classes.progress} />
+            ) : values.isValidated ? (
+              <Typography className={classes.title} variant='h4' gutterBottom>
+                Obrigado!
+              </Typography>
+            ) : (
+              <GoogleLogin
+                clientId='217118554638-fkh62t3fu61hvlmrqnmeun9idour35jr.apps.googleusercontent.com'
+                buttonText='Entrar com o Google'
+                onSuccess={onSuccessGoogle}
+                onFailure={onFailureGoogle}
+                cookiePolicy={'single_host_origin'}
+              />
+            )}
+          </div>
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          <Lottie options={loadingLottieOptions} width='250' height='250' />
+          <Typography className={classes.title} variant='h4'>
+            Aguardando localização
+          </Typography>
+        </React.Fragment>
+      )}
     </div>
   );
 }

@@ -5,7 +5,7 @@ import {
   Paper,
   TextField,
   Button,
-  Typography
+  Typography,
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -14,39 +14,39 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     padding: 20,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   body: {
     marginTop: 15,
     marginBottom: 30,
     color: 'white',
     fontFamily: 'Ubuntu',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   title: {
     color: 'white',
     fontFamily: 'Ubuntu',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   paper: {
     width: '100%',
     marginTop: 16,
-    padding: 8
+    padding: 8,
   },
   img: {
     width: theme.spacing(41),
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
   },
   textField: {
-    width: '100%'
+    width: '100%',
   },
   button: {
     width: '100%',
     padding: 8,
     marginTop: theme.spacing(2),
     backgroundColor: 'white',
-    color: 'black'
-  }
+    color: 'black',
+  },
 }));
 
 export default function InterationForm({ history, match: { params } }) {
@@ -54,7 +54,7 @@ export default function InterationForm({ history, match: { params } }) {
 
   const [values, setValues] = useState({
     text: '',
-    googleId: params.googleId
+    googleId: params.googleId,
   });
 
   const onChange = e => {
@@ -69,32 +69,33 @@ export default function InterationForm({ history, match: { params } }) {
     <div className={classes.root}>
       <img
         className={classes.img}
-        src='https://i.imgur.com/I1NTCFk.png'
-        alt='logo'
+        src="https://i.imgur.com/I1NTCFk.png"
+        alt="logo"
       />
-      <Typography className={classes.title} variant='h5' gutterBottom>
+      <Typography className={classes.title} variant="h5" gutterBottom>
         Interaja com a gente!
       </Typography>
       <Paper className={classes.paper}>
         <TextField
-          id='outlined-phone'
-          name='text'
-          label='Mensagem'
+          id="outlined-phone"
+          name="text"
+          label="Mensagem"
           className={classes.textField}
           value={values.text}
           onChange={onChange}
-          margin='normal'
-          variant='outlined'
+          margin="normal"
+          variant="outlined"
           multiline
-          helperText='Escreva sua mensagem aqui'
-          rows='5'
+          helperText="Escreva sua mensagem aqui"
+          rows="5"
           rowsMax={5}
+          autoFocus
         />
       </Paper>
       <Button
         className={classes.button}
-        variant='contained'
-        color='primary'
+        variant="contained"
+        color="primary"
         onClick={onSubmit}
       >
         Enviar

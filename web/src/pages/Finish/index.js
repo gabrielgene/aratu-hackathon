@@ -107,7 +107,7 @@ export default function LocationScreen(props) {
         eventListeners={eventListeners}
       />
       <Typography className={classes.body} variant="body1">
-        Agora você está participando de nosso evento!
+        Agora você está concorrendo a uma camisa do nosso evento! 🚀
       </Typography>
     </div>
   );

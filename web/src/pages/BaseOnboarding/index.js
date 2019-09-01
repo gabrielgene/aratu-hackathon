@@ -57,54 +57,51 @@ const loadingLottieOptions = {
 export default function BaseOnboarding({ history }) {
   const classes = useStyles();
 
-  const [values, setValues] = useState({
-    isValidated: false,
-    isLoading: false,
-    isAllowed: false,
-    lat: 0,
-    lng: 0,
-  });
+  const [loading, setLoading] = useState(false);
+  const [allowed, setAllowed] = useState(false);
+  const [location, setLocation] = useState({ lat: 0, lng: 0 });
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       position => {
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
-
-        setValues({ ...values, lat, lng, isAllowed: true });
+        setAllowed(true);
+        setLocation({ lat, lng });
       },
       () => {
-        console.log('negou auth que sabe');
-
-        setValues({ ...values, isAllowed: false });
+        console.log('erro que sabe auth que sabe');
+        setAllowed(true);
       },
     );
   }, []);
 
-  const onSuccessGoogle = useCallback(response => {
-    const { profileObj } = response;
-    const { email, googleId, givenName, name, familyName } = profileObj;
+  const onSuccessGoogle = useCallback(
+    response => {
+      setLoading(true);
+      const { profileObj } = response;
+      const { email, googleId, givenName, name, familyName } = profileObj;
 
-    setValues({ ...values, isLoading: true });
+      getAdress(location.lat, location.lng).then(result => {
+        const userData = {
+          email,
+          googleId,
+          givenName,
+          name,
+          familyName,
+          address: result.address,
+        };
 
-    getAdress(values.lat, values.lng).then(result => {
-      const userData = {
-        email,
-        googleId,
-        givenName,
-        name,
-        familyName,
-        address: result.address,
-      };
-
-      //SEND ALL TO BACKEND
-      sendUserData(userData)
-        .then(() => {
-          history.push('/concluido');
-        })
-        .catch(err => console.log(err));
-    });
-  }, []);
+        //SEND ALL TO BACKEND
+        sendUserData(userData)
+          .then(() => {
+            history.push('/concluido');
+          })
+          .catch(err => console.log(err));
+      });
+    },
+    [location.lat, location.lng],
+  );
 
   const onFailureGoogle = useCallback(err => {
     console.log(err);
@@ -112,26 +109,22 @@ export default function BaseOnboarding({ history }) {
 
   return (
     <div className={classes.root}>
-      {values.isAllowed ? (
+      {allowed ? (
         <React.Fragment>
           <img
             className={classes.img}
             src="https://i.imgur.com/I1NTCFk.png"
             alt="logo"
           />
-          <Lottie options={defaultLottieOptions} width="250" height="250" />
+          <Lottie options={defaultLottieOptions} width="60%" height="250" />
           <Typography className={classes.body} variant="body1">
             Estamos participando de um hackaton (competição) e precisamos de sua
             ajuda! Basta logar com o google, e sua ajuda estará computada, ative
             as localizacoes tambem, muito obrigado!
           </Typography>
           <div className={classes.footer}>
-            {values.isLoading ? (
+            {loading ? (
               <CircularProgress className={classes.progress} />
-            ) : values.isValidated ? (
-              <Typography className={classes.title} variant="h4" gutterBottom>
-                Obrigado!
-              </Typography>
             ) : (
               <GoogleLogin
                 clientId="217118554638-fkh62t3fu61hvlmrqnmeun9idour35jr.apps.googleusercontent.com"

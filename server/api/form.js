@@ -21,10 +21,10 @@ app.post('*', async (req, res) => {
   });
 });
 
-app.get('*', async (req, res) => {
+app.get('*', async (_, res) => {
   await connect();
-  User.findOne({}).then(user => {
-    res.send(user);
+  User.find({}).then(users => {
+    res.send(users);
   });
 });
 

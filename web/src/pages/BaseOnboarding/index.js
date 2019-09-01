@@ -69,7 +69,7 @@ export default function BaseOnboarding(props) {
   const [location, setLocation] = useState({ lat: 0, lng: 0 });
   const [cookies] = useCookies(['googleId']);
   if (cookies.googleId) {
-    history.push('/concluido');
+    history.push('/interagir');
   }
 
   useEffect(() => {
@@ -115,7 +115,7 @@ export default function BaseOnboarding(props) {
         //SEND ALL TO BACKEND
         sendUserData(userData)
           .then(() => {
-            history.push('/concluido');
+            history.push('/interagir');
           })
           .catch(err => console.log(err));
       });

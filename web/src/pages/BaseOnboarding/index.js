@@ -139,8 +139,8 @@ export default function BaseOnboarding(props) {
           <Lottie options={defaultLottieOptions} width="60%" height="250" />
           <Typography className={classes.body} variant="body1">
             Nosso 1º hackaton aratu está acontecendo! Que tal nos dizer algo
-            sobre a sua experiência? Basta se cadastrar. Ative as localizacoes
-            para concorrer a brindes!
+            sobre a sua experiência? Basta se cadastrar. Ative as localizações
+            para concorrer a uma camisa do evento 👕!
           </Typography>
           <div className={classes.footer}>
             {loading ? (

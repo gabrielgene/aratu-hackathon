@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import BaseOnboarding from './components/BaseOnboarding';
+import Finish from './components/Finish';
+import Dashboard from './pages/Dashboard';
 import * as serviceWorker from './serviceWorker';
 
 import './index.css';
@@ -11,6 +13,8 @@ const App = () => (
   <Router>
     <React.Fragment>
       <Route exact path="/" component={BaseOnboarding} />
+      <Route path="/finish" component={Finish} />
+      <Route path="/dashboard" component={Dashboard} />
     </React.Fragment>
   </Router>
 );

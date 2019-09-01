@@ -20,6 +20,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     marginLeft: 16,
+    flexGrow: 1,
   },
   nowAiring: {
     marginBottom: 16,

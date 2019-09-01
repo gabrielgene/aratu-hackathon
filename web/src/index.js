@@ -10,6 +10,7 @@ import Form from './pages/Form';
 import Finish from './pages/Finish';
 import Dashboard from './pages/Dashboard';
 import Data from './pages/Data';
+import FormBuilder from './pages/FormBuilder';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -25,6 +26,7 @@ const App = () => (
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/formulario" component={Form} />
       <Route path="/dados" component={Data} />
+      <Route path="/construtor" component={FormBuilder} />
     </React.Fragment>
   </Router>
 );

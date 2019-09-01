@@ -1,7 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import Lottie from 'react-lottie';
-import { makeStyles, Typography } from '@material-ui/core';
+import { makeStyles, Typography, CircularProgress } from '@material-ui/core';
 import { GoogleLogin } from 'react-google-login';
+
+import { getAdress } from '../../services/GeolocationAPI';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,6 +22,10 @@ const useStyles = makeStyles(theme => ({
   title: {
     color: 'white',
     fontFamily: 'Ubuntu'
+  },
+  progress: {
+    margin: theme.spacing(2),
+    color: 'white'
   }
 }));
 
@@ -35,7 +41,10 @@ const defaultLottieOptions = {
 export default function BaseOnboarding(props) {
   const classes = useStyles();
 
-  const [isValidated, setValidated] = useState(false);
+  const [values, setValues] = useState({
+    isValidated: false,
+    isLoading: false
+  });
 
   const onSuccessGoogle = useCallback(response => {
     const { profileObj } = response;
@@ -47,7 +56,21 @@ export default function BaseOnboarding(props) {
       familyName,
       imageUrl
     } = profileObj;
-    setValidated(true);
+
+    setValues({ ...values, isLoading: true });
+
+    navigator.geolocation.getCurrentPosition(position => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+
+      getAdress(lat, lng).then(result => {
+        console.log(result.address);
+
+        //SEND ALL TO BACKEND
+
+        setValues({ isLoading: false, isValidated: true });
+      });
+    });
   }, []);
 
   const onFailureGoogle = useCallback(() => {
@@ -62,11 +85,13 @@ export default function BaseOnboarding(props) {
       <Lottie options={defaultLottieOptions} width='250' height='250' />
       <Typography className={classes.body} variant='body1'>
         Estamos participando de um hackaton (competição) e precisamos de sua
-        ajuda! Basta logar com o google, e sua ajuda estará computada, muito
-        obrigado!
+        ajuda! Basta logar com o google, e sua ajuda estará computada, ative as
+        localizacoes tambem, muito obrigado!
       </Typography>
       <div className={classes.footer}>
-        {isValidated ? (
+        {values.isLoading ? (
+          <CircularProgress className={classes.progress} />
+        ) : values.isValidated ? (
           <Typography className={classes.title} variant='h4' gutterBottom>
             Obrigado!
           </Typography>

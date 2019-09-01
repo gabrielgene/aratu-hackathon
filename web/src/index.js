@@ -6,6 +6,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
 import BaseOnboarding from './pages/BaseOnboarding';
+import Form from './pages/Form';
 import Finish from './pages/Finish';
 import Dashboard from './pages/Dashboard';
 
@@ -18,9 +19,10 @@ library.add(fab, fas);
 const App = () => (
   <Router>
     <React.Fragment>
-      <Route exact path="/" component={BaseOnboarding} />
-      <Route path="/concluido" component={Finish} />
-      <Route path="/dashboard" component={Dashboard} />
+      <Route exact path='/' component={BaseOnboarding} />
+      <Route path='/concluido' component={Finish} />
+      <Route path='/formulario' component={Form} />
+      <Route path='/dashboard' component={Dashboard} />
     </React.Fragment>
   </Router>
 );

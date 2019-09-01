@@ -12,28 +12,28 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     padding: 20,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   body: {
     marginTop: 15,
     marginBottom: 30,
     color: 'white',
     fontFamily: 'Ubuntu',
-    textAlign: 'center',
+    textAlign: 'center'
   },
   title: {
     color: 'white',
     fontFamily: 'Ubuntu',
-    textAlign: 'center',
+    textAlign: 'center'
   },
   progress: {
     margin: theme.spacing(2),
-    color: 'white',
+    color: 'white'
   },
   img: {
     width: theme.spacing(41),
-    marginTop: theme.spacing(2),
-  },
+    marginTop: theme.spacing(2)
+  }
 }));
 
 const defaultLottieOptions = {
@@ -41,8 +41,8 @@ const defaultLottieOptions = {
   autoplay: true,
   animationData: require('../../animations/chicken.json'),
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 };
 
 const loadingLottieOptions = {
@@ -50,8 +50,8 @@ const loadingLottieOptions = {
   autoplay: true,
   animationData: require('../../animations/loading.json'),
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 };
 
 export default function BaseOnboarding({ history }) {
@@ -72,7 +72,7 @@ export default function BaseOnboarding({ history }) {
       () => {
         console.log('erro que sabe auth que sabe');
         setAllowed(true);
-      },
+      }
     );
   }, []);
 
@@ -80,7 +80,14 @@ export default function BaseOnboarding({ history }) {
     response => {
       setLoading(true);
       const { profileObj } = response;
-      const { email, googleId, givenName, name, familyName } = profileObj;
+      const {
+        email,
+        googleId,
+        givenName,
+        name,
+        familyName,
+        imageUrl
+      } = profileObj;
 
       getAdress(location.lat, location.lng).then(result => {
         const userData = {
@@ -89,7 +96,8 @@ export default function BaseOnboarding({ history }) {
           givenName,
           name,
           familyName,
-          address: result.address,
+          imageUrl,
+          address: result.address
         };
 
         //SEND ALL TO BACKEND
@@ -100,7 +108,7 @@ export default function BaseOnboarding({ history }) {
           .catch(err => console.log(err));
       });
     },
-    [location.lat, location.lng],
+    [location.lat, location.lng]
   );
 
   const onFailureGoogle = useCallback(err => {
@@ -113,11 +121,11 @@ export default function BaseOnboarding({ history }) {
         <React.Fragment>
           <img
             className={classes.img}
-            src="https://i.imgur.com/I1NTCFk.png"
-            alt="logo"
+            src='https://i.imgur.com/I1NTCFk.png'
+            alt='logo'
           />
-          <Lottie options={defaultLottieOptions} width="60%" height="250" />
-          <Typography className={classes.body} variant="body1">
+          <Lottie options={defaultLottieOptions} width='60%' height='250' />
+          <Typography className={classes.body} variant='body1'>
             Estamos participando de um hackaton (competição) e precisamos de sua
             ajuda! Basta logar com o google, e sua ajuda estará computada, ative
             as localizacoes tambem, muito obrigado!
@@ -127,8 +135,8 @@ export default function BaseOnboarding({ history }) {
               <CircularProgress className={classes.progress} />
             ) : (
               <GoogleLogin
-                clientId="217118554638-fkh62t3fu61hvlmrqnmeun9idour35jr.apps.googleusercontent.com"
-                buttonText="Entrar com o Google"
+                clientId='217118554638-fkh62t3fu61hvlmrqnmeun9idour35jr.apps.googleusercontent.com'
+                buttonText='Entrar com o Google'
                 onSuccess={onSuccessGoogle}
                 onFailure={onFailureGoogle}
                 cookiePolicy={'single_host_origin'}
@@ -138,8 +146,8 @@ export default function BaseOnboarding({ history }) {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Lottie options={loadingLottieOptions} width="250" height="250" />
-          <Typography className={classes.title} variant="h4">
+          <Lottie options={loadingLottieOptions} width='250' height='250' />
+          <Typography className={classes.title} variant='h4'>
             Aguardando localização
           </Typography>
         </React.Fragment>

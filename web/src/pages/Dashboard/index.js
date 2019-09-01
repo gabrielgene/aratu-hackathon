@@ -6,6 +6,7 @@ import Topbar from "../../components/Topbar";
 import NumberStats from "../../components/NumberStats";
 import HistoryChart from "../../components/HistoryChart";
 import NowAiring from "../../components/NowAiring";
+import FilterBar from "../../components/FilterBar";
 
 
 const useStyles = makeStyles(theme => ({
@@ -15,15 +16,27 @@ const useStyles = makeStyles(theme => ({
   content: {
     display: 'flex',
     padding: 16,
+    flexDirection: 'column',
   },
   contentMiddle: {
     display: 'flex',
-    flexDirection: 'column',
-    marginLeft: 16,
     flexGrow: 1,
   },
-  nowAiring: {
+  header: {
     marginBottom: 16,
+    display: 'flex',
+  },
+  historyChart: {
+    flexGrow: 1,
+    marginLeft: 16,
+    height: '100%',
+  },
+  filterBar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'left',
+    flexGrow: 1,
+    marginLeft: 16,
   }
 }));
 
@@ -34,10 +47,13 @@ export default function ButtonAppBar() {
     <div className={classes.root}>
       <Topbar />
       <div className={classes.content}>
-        <NumberStats />
-        <div className={classes.contentMiddle}>
+        <div className={classes.header}>
           <NowAiring className={classes.nowAiring} />
-          <HistoryChart />
+          <FilterBar className={classes.filterBar}/>
+        </div>
+        <div className={classes.contentMiddle}>
+          <NumberStats />
+          <HistoryChart className={classes.historyChart} />
         </div>
       </div>
     </div>

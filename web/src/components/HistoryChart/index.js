@@ -10,7 +10,6 @@ const useStyles = makeStyles(theme => ({
     padding: 8,
     minHeight: 424,
     minWidth: 800,
-    width: '100%',
   }
 }));
 

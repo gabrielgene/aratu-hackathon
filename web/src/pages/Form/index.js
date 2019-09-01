@@ -59,6 +59,15 @@ const backdropOptions = {
   }
 };
 
+const loadingOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: require('../../animations/loading.json'),
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice'
+  }
+};
+
 export default function Form({ router }) {
   const classes = useStyles();
 
@@ -160,7 +169,11 @@ export default function Form({ router }) {
           marginTop: 8
         }}
       >
-        <Lottie options={backdropOptions} width='45%' height='45%' />
+        {values.isLoading ? (
+          <Lottie options={loadingOptions} width='45%' height='45%' />
+        ) : (
+          <Lottie options={backdropOptions} width='45%' height='45%' />
+        )}
       </div>
     </React.Fragment>
   );

@@ -55,7 +55,13 @@ const loadingLottieOptions = {
   },
 };
 
-export default function BaseOnboarding({ history }) {
+export default function BaseOnboarding(props) {
+  const {
+    history,
+    match: {
+      params: { id },
+    },
+  } = props;
   const classes = useStyles();
 
   const [loading, setLoading] = useState(false);
@@ -102,6 +108,7 @@ export default function BaseOnboarding({ history }) {
           name,
           familyName,
           imageUrl,
+          twId: id,
           address: result.address,
         };
 

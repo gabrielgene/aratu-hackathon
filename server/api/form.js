@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const User = require('../models/user');
+const Twitter = require('../models/twitter');
 const connect = require('../utils/db');
 
 const app = express();
@@ -13,6 +14,10 @@ app.use(bodyParser.json());
 app.post('*', async (req, res) => {
   await connect();
 
+  if (req.body.twId) {
+    const { email } = req.body;
+    await Twitter.findByIdAndUpdate(req.body.twId, { email });
+  }
   const model = new User(req.body);
 
   model.save().then(data => {

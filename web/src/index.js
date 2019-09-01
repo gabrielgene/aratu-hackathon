@@ -11,6 +11,7 @@ import Finish from './pages/Finish';
 import Dashboard from './pages/Dashboard';
 import Data from './pages/Data';
 import FormBuilder from './pages/FormBuilder';
+import InteractionForm from './pages/InteractionForm';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -22,11 +23,13 @@ const App = () => (
   <Router>
     <React.Fragment>
       <Route exact path="/" component={BaseOnboarding} />
+      <Route path="/tw/:id" component={BaseOnboarding} />
       <Route path="/concluido" component={Finish} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/formulario" component={Form} />
       <Route path="/dados" component={Data} />
       <Route path="/construtor" component={FormBuilder} />
+      <Route path="/interagir" component={InteractionForm} />
     </React.Fragment>
   </Router>
 );

@@ -11,6 +11,12 @@ import TextField from '@material-ui/core/TextField';
 import SaveIcon from '@material-ui/icons/Save';
 import IconButton from '@material-ui/core/IconButton';
 import exportFromJSON from 'export-from-json'
+import SendIcon from '@material-ui/icons/Send';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import clsx from 'clsx';
 
@@ -46,6 +52,7 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     margin: theme.spacing(2),
+    color: '#302b63',
   },
 }));
 
@@ -126,9 +133,53 @@ export default function SimpleTable() {
     { name: 'Texto', change: 'text' },
   ];
 
+  const [open, setOpen] = React.useState(false);
+
+  function handleClickOpen() {
+    setOpen(true);
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
+
   return (
     <div>
       <Topbar />
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {'Insira sua mensagem customizada'}
+        </DialogTitle>
+        <DialogContent style={{ width: 400 }}>
+          <DialogContentText id="alert-dialog-description">
+            <TextField
+              id="outlined-dense-multiline"
+              label="Mensagem"
+              style={{ width: '100%' }}
+              value="Nosso 1º hackaton está chegando ao fim! Que tal nos dizer algo sobre
+            a sua experiência? Acesse o link para enviar o seu feedback.
+            https://aratu-web.gabrielgene.now.sh"
+              margin="dense"
+              variant="outlined"
+              multiline
+              rowsMax="4"
+            />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancelar
+          </Button>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            Enviar
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Paper className={classes.filtersPaper}>
         {filters.map(f => (
           <TextField
@@ -141,9 +192,18 @@ export default function SimpleTable() {
             variant="outlined"
           />
         ))}
-        <IconButton className={clsx(classes.button, classes.iconSmall)} onClick={() => generateCsv(trueData)}>
-          <SaveIcon />
-        </IconButton>
+        <Button
+          className={clsx(classes.button, classes.iconSmall)}
+          onClick={() => generateCsv(trueData)}
+        >
+          <SaveIcon classes={classes.icon} />
+        </Button>
+        <Button
+          className={clsx(classes.button, classes.iconSmall)}
+          onClick={handleClickOpen}
+        >
+          <SendIcon classes={classes.icon} />
+        </Button>
       </Paper>
 
       <Paper className={classes.root}>

@@ -102,7 +102,7 @@ export default function BaseOnboarding({ router }) {
         src="https://i.imgur.com/I1NTCFk.png"
         alt="logo"
       />
-      <Lottie options={defaultLottieOptions} width="250" height="250" />
+      <Lottie options={defaultLottieOptions} width="60%" height="150" />
       <Typography className={classes.body} variant="body1">
         Estamos participando de um hackaton (competição) e precisamos de sua
         ajuda! Basta logar com o google, e sua ajuda estará computada, ative as

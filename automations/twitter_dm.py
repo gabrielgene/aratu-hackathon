@@ -32,7 +32,7 @@ def send_message():
     time.sleep(1)
 
     tw_box = browser.find_element_by_css_selector('div.DraftEditor-editorContainer > div')
-    tw_box.send_keys("Nosso 1º hackaton está chegando ao fim! Que tal nos dizer algo sobre a sua experiência? Acesse o link para enviar o seu feedback. https://aratu-web.gabrielgene.now.sh {}".format(random.randint(1,101)))
+    tw_box.send_keys("Nosso 1º hackaton está chegando ao fim! Que tal nos dizer algo sobre a sua experiência? Acesse o link para enviar o seu feedback. https://aratu-web.gabrielgene.now.sh/tw/{} {}".format(doc['_id'], random.randint(1,101)))
 
     browser.find_element_by_xpath('//div[@data-testid="tweetButton"]').click()
     time.sleep(3)

@@ -102,7 +102,11 @@ export default function Form({ router }) {
         <Typography className={classes.title} variant='h5' gutterBottom>
           Complete para participar!
         </Typography>
-        <Lottie options={defaultLottieOptions} width='200' height='200' />
+        {values.isLoading ? (
+          <Lottie options={loadingOptions} width='70%' height='70%' />
+        ) : (
+          <Lottie options={defaultLottieOptions} width='200' height='200' />
+        )}
         <TextField
           disabled={values.isLoading}
           id='outlined-phone'
@@ -163,17 +167,6 @@ export default function Form({ router }) {
         >
           {values.isLoading ? 'Enviando...' : 'Enviar'}
         </Button>
-      </div>
-      <div
-        style={{
-          marginTop: 8
-        }}
-      >
-        {values.isLoading ? (
-          <Lottie options={loadingOptions} width='45%' height='45%' />
-        ) : (
-          <Lottie options={backdropOptions} width='45%' height='45%' />
-        )}
       </div>
     </React.Fragment>
   );

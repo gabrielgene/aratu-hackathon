@@ -5,6 +5,7 @@ import Avatar from '@material-ui/core/Avatar';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import CardHeader from '@material-ui/core/CardHeader';
+import Card from '@material-ui/core/Card';
 import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({

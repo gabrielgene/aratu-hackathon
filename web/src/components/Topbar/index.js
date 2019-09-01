@@ -40,7 +40,7 @@ const Bar = ({ history }) => {
         <Button
           color="inherit"
           className={classes.button}
-          onClick={() => history.push('/form')}
+          onClick={() => history.push('/construtor')}
         >
           Formulário
         </Button>

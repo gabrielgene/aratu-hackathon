@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
   cardHeader: {
     fontSize: 20,
     fontWeight: 500,
+    color: '#2f2b63',
   },
 }));
 
@@ -37,7 +38,6 @@ export default function NowAiring({ className }) {
       <CardHeader
         title="Hackaton Aratu"
         classes={{ title: classes.cardHeader }}
-        color="#2f2b63"
       />
     </Card>
   );

@@ -36,7 +36,7 @@ export default function SimpleTable() {
   const [values, setValues] = React.useState({
     email: '',
     suburb: '',
-    age: '',
+    name: '',
     gender: '',
     platform: '',
     program: '',
@@ -93,9 +93,9 @@ export default function SimpleTable() {
   };
 
   const filters = [
+    { name: 'Nome', change: 'name' },
     { name: 'Email', change: 'email' },
     { name: 'Bairro', change: 'suburb' },
-    { name: 'Idade', change: 'age' },
     { name: 'Plataforma', change: 'platform' },
     { name: 'Programa', change: 'program' },
     { name: 'Texto', change: 'text' },
